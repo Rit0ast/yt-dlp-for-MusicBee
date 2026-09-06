@@ -1,15 +1,17 @@
-<!-- TODO -->
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net48</TargetFramework>
     <OutputType>Library</OutputType>
     <AssemblyName>mb_YtDlpForMusicBee</AssemblyName>
+    <AssemblyTitle>placeholder text</AssemblyTitle>
     <RootNamespace>YtDlpForMusicBee</RootNamespace>
     <UseWindowsForms>true</UseWindowsForms>
     <LangVersion>latest</LangVersion>
     <Nullable>disable</Nullable>
     <ImplicitUsings>disable</ImplicitUsings>
+    <Company>Rit0ast</Company>
+    <Description>placeholder text</Description>
   </PropertyGroup>
 
 </Project>
