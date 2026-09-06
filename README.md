@@ -1,4 +1,4 @@
-# yt-dlp for Musicbee
+# yt-dlp for MusicBee
 
 ## About The Plugin
 Placeholder text
@@ -21,6 +21,7 @@ ffmpeg -version
 #### Notes
 - After setting up `yt-dlp` and `ffmpeg`, restart MusicBee
 - Built using MusicBee Plugin API v3.1
+- Built using .NET 4.8
 
 ### Usage
 Placeholder text
