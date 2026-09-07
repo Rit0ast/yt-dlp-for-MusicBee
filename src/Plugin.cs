@@ -1,8 +1,7 @@
 using System;
 using System.Reflection;
-using static MusicBeePlugin.Plugin;
 
-namespace YtDlpForMusicBee
+namespace MusicBeePlugin
 {
     public partial class Plugin
     {
@@ -42,6 +41,9 @@ namespace YtDlpForMusicBee
         }
 
         public void Close(PluginCloseReason reason)
+        {
+        }
+        public void ReceiveNotification(string sourceFileUrl, NotificationType type)
         {
         }
     }
