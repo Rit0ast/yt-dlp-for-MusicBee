@@ -1,5 +1,6 @@
 using System;
 using System.Reflection;
+using YtDlpForMusicBee.UI;
 
 namespace MusicBeePlugin
 {
@@ -7,6 +8,10 @@ namespace MusicBeePlugin
     {
         private MusicBeeApiInterface mbApiInterface;
         private PluginInfo about = new PluginInfo();
+
+        // PluginForm instance (only one is ever created)
+        private PluginForm _pluginForm;
+
         public PluginInfo Initialise(IntPtr apiInterfacePtr)
         {
             Assembly thisAssembly = typeof(Plugin).Assembly;
@@ -18,35 +23,48 @@ namespace MusicBeePlugin
             about.PluginInfoVersion = PluginInfoVersion;
             about.Type = PluginType.General;
             about.Name = thisAssembly.GetCustomAttribute<AssemblyTitleAttribute>().Title;
-            about.Description = thisAssembly.GetCustomAttribute<AssemblyDescriptionAttribute>().Description;
+            about.Description = thisAssembly
+                .GetCustomAttribute<AssemblyDescriptionAttribute>()
+                .Description;
             about.Author = thisAssembly.GetCustomAttribute<AssemblyCompanyAttribute>().Company;
             about.TargetApplication = "";
-            about.VersionMajor = (short) thisAssembly.GetName().Version.Major;
-            about.VersionMinor = (short) thisAssembly.GetName().Version.Minor;
-            about.Revision = (short) thisAssembly.GetName().Version.Revision;
+            about.VersionMajor = (short)thisAssembly.GetName().Version.Major;
+            about.VersionMinor = (short)thisAssembly.GetName().Version.Minor;
+            about.Revision = (short)thisAssembly.GetName().Version.Revision;
             about.MinInterfaceVersion = MinInterfaceVersion;
             about.MinApiRevision = MinApiRevision;
             about.ReceiveNotifications = ReceiveNotificationFlags.PlayerEvents;
             about.ConfigurationPanelHeight = 0;
+
+            mbApiInterface.MB_AddMenuItem(
+                "mnuTools/yt-dlp for MusicBee",
+                null,
+                OnToolsMenuItemClicked
+            );
+
             return about;
+        }
+
+        private void OnToolsMenuItemClicked(object sender, EventArgs e)
+        {
+            if (_pluginForm == null || _pluginForm.IsDisposed)
+            {
+                _pluginForm = new PluginForm();
+            }
+
+            _pluginForm.Show();
+            _pluginForm.Activate();
         }
 
         public bool Configure(IntPtr panelHandle)
         {
             return false;
         }
-       
-        public void SaveSettings()
-        {
-        }
 
-        public void Close(PluginCloseReason reason)
-        {
-        }
-        public void ReceiveNotification(string sourceFileUrl, NotificationType type)
-        {
-        }
+        public void SaveSettings() { }
+
+        public void Close(PluginCloseReason reason) { }
+
+        public void ReceiveNotification(string sourceFileUrl, NotificationType type) { }
     }
-
-    
 }
